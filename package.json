@@ -4,6 +4,7 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
+    "node-fetch": "^2.6.1",
     "slash-create": "^3.3.0"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
   },
   "scripts": {
     "start": "node build/src/main.js",
+    "prestart:dev": "npm run clean",
     "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/main.js\"",
     "clean": "rimraf coverage dist tmp",
     "build": "tsc -p tsconfig.release.json",
