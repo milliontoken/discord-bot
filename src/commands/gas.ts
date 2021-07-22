@@ -1,4 +1,3 @@
-// import { MessageEmbed } from 'discord.js';
 import {
   CommandContext,
   SlashCommand,
