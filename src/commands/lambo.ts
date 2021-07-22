@@ -14,7 +14,7 @@ module.exports = class HelloCommand extends SlashCommand {
 
   async run(ctx) {
     await ctx.send('Here is your lambo: ' +
-      '<:lambo_0:867765265420779540>\n' +
+      '<:lambo_0:867765265420779540>' +
       '<:lambo_1:867765267693436971>' +
       '<:lambo_2:867765277515841576>' +
       '<:lambo_3:867765277320413224>');
