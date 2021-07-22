@@ -10,7 +10,7 @@ module.exports = class GasCommand extends SlashCommand {
   constructor(creator: SlashCreator) {
     super(creator, {
       name: 'gas',
-      description: 'Gets current gas prices',
+      description: `Gets current gas prices (as a millionaire)`,
       guildIDs: [process.env.GUILD_ID],
     });
 
