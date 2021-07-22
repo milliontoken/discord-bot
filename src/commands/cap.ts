@@ -29,7 +29,7 @@ module.exports = class HelloCommand extends SlashCommand {
       const responseBody = await response.json()
       const marketCapUsd = responseBody.market_data.market_cap.usd;
 
-      commandResponse = `:billed_cap: Current market cap is **$${formatLargeNumber(marketCapUsd)}**.`;
+      commandResponse = `:billed_cap: Market cap is **$${formatLargeNumber(marketCapUsd)}**.`;
     } catch {
       commandResponse = `Something is wrong - try again a bit later.`;
     }
