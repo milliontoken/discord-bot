@@ -22,7 +22,7 @@
     "typescript": "~4.2.2"
   },
   "scripts": {
-    "start": "node build/src/main.js",
+    "start": "node dist/main.js",
     "prestart:dev": "npm run clean",
     "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/main.js\"",
     "clean": "rimraf coverage dist tmp",
