@@ -1,11 +1,17 @@
-import { CommandContext, SlashCommand, SlashCreator } from 'slash-create';
+// import { MessageEmbed } from 'discord.js';
+import {
+  CommandContext,
+  SlashCommand,
+  SlashCreator,
+  MessageEmbedOptions,
+} from 'slash-create';
 import * as fetch from 'node-fetch';
 
-module.exports = class GweiCommand extends SlashCommand {
+module.exports = class GasCommand extends SlashCommand {
   constructor(creator: SlashCreator) {
     super(creator, {
-      name: 'gwei',
-      description: 'Gets current gwei prices',
+      name: 'gas',
+      description: 'Gets current gas prices',
       guildIDs: [process.env.GUILD_ID],
     });
 
@@ -21,8 +27,6 @@ module.exports = class GweiCommand extends SlashCommand {
       },
     };
 
-    let commandResponse: string;
-
     try {
       const response = await fetch(apiUrl, init);
       const responseBody: EthGasResponseBody = await response.json();
@@ -32,16 +36,23 @@ module.exports = class GweiCommand extends SlashCommand {
         result: { SafeGasPrice, FastGasPrice, ProposeGasPrice },
       } = responseBody;
 
-      commandResponse =
-        `:fuelpump: Current gwei prices:\n\n` +
-        `Low - **${SafeGasPrice}**\n` +
-        `Avg - **${ProposeGasPrice}**\n` +
-        `High - **${FastGasPrice}**\n`;
-    } catch {
-      commandResponse = `Something is wrong - try again a bit later.`;
-    }
+      const embed: MessageEmbedOptions = {
+        title: ':fuelpump: Current gas prices:',
+        fields: [
+          { name: 'Low', value: SafeGasPrice, inline: true },
+          { name: 'Average', value: ProposeGasPrice, inline: true },
+          { name: 'High', value: FastGasPrice, inline: true },
+        ],
+        footer: {
+          text: 'Gas prices provided by etherscan.io',
+        },
+        timestamp: new Date(),
+      };
 
-    await ctx.send(commandResponse);
+      return await ctx.send({ embeds: [embed] });
+    } catch {
+      return await ctx.send(`Something is wrong - try again a bit later.`);
+    }
   }
 };
 
