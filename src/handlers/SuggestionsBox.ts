@@ -9,14 +9,14 @@ export class SuggestionsBox implements IMessageHandler {
     handle(message: Message): void 
     {
 
-        if (message.channel.id == this.channel_id) 
+        try
         {
-            try
+            if (message.channel.id == this.channel_id) 
             {
-            message.react('✅')
-            message.react('❌')
+                message.react('✅')
+                message.react('❌')
             }
-            catch (err) {console.log('Error in SuggestionsBox: ' + err)}
         }
+        catch (err) {console.log('Error in SuggestionsBox: ' + err)}
     }
 }
