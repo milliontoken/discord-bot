@@ -36,7 +36,7 @@ module.exports = class GasCommand extends SlashCommand {
       } = responseBody;
 
       const embed: MessageEmbedOptions = {
-        title: ':fuelpump: Current gas prices:',
+        title: ':fuelpump: Current Gas Prices (gwei)',
         color: 15509760,
         fields: [
           { name: 'Low', value: SafeGasPrice, inline: true },
