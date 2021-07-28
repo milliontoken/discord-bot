@@ -5,6 +5,7 @@ import {
   MessageEmbedOptions,
 } from 'slash-create';
 import * as fetch from 'node-fetch';
+import { cache } from '../cache';
 
 module.exports = class GasCommand extends SlashCommand {
   constructor(creator: SlashCreator) {
@@ -25,11 +26,18 @@ module.exports = class GasCommand extends SlashCommand {
         'content-type': 'application/json;charset=UTF-8',
       },
     };
+    const cacheKey = 'gas';
 
     try {
-      const response = await fetch(apiUrl, init);
-      const responseBody: EthGasResponseBody = await response.json();
-      console.log(responseBody);
+      let responseBody: EthGasResponseBody;
+
+      if (cache.has(cacheKey)) {
+        responseBody = cache.get(cacheKey);
+      } else {
+        const response = await fetch(apiUrl, init);
+        responseBody = await response.json();
+        cache.set(cacheKey, responseBody);
+      }
 
       const {
         result: { SafeGasPrice, FastGasPrice, ProposeGasPrice },
