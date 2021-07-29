@@ -47,6 +47,8 @@ module.exports = class HelloCommand extends SlashCommand {
           ethExplorerBody.tokenInfo.holdersCount +
             covalentBody.data.pagination.total_count,
         );
+
+        cache.set(cacheKey, holders, 60); // going to cache this one longer since changes aren't as drastic
       }
 
       await ctx.send(
