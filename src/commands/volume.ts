@@ -27,8 +27,8 @@ module.exports = class HelloCommand extends SlashCommand {
     let commandResponse;
 
     try {
-      if (cache.has(cacheKey)) {
-        commandResponse = cache.get(cacheKey);
+      if (await cache.has(cacheKey)) {
+        commandResponse = await cache.get(cacheKey);
       } else {
         const response = await fetch(apiUrl, init);
         const responseBody = await response.json();
@@ -40,7 +40,7 @@ module.exports = class HelloCommand extends SlashCommand {
           volume,
         )}** (${formatPercentageChange(volumeChange)}%).`;
 
-        cache.set(cacheKey, commandResponse);
+        await cache.set(cacheKey, commandResponse);
       }
     } catch (error) {
       commandResponse = `Something went wrong - try again a bit later.`;

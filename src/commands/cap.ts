@@ -28,8 +28,8 @@ module.exports = class HelloCommand extends SlashCommand {
     let commandResponse;
 
     try {
-      if (cache.has(cacheKey)) {
-        commandResponse = cache.get(cacheKey);
+      if (await cache.has(cacheKey)) {
+        commandResponse = await cache.get(cacheKey);
       } else {
         const response = await fetch(apiUrl, init);
         const responseBody = await response.json();
@@ -39,7 +39,7 @@ module.exports = class HelloCommand extends SlashCommand {
           marketCapUsd,
         )}**.`;
 
-        cache.set(cacheKey, commandResponse);
+        await cache.set(cacheKey, commandResponse);
       }
     } catch {
       commandResponse = `Something is wrong - try again a bit later.`;

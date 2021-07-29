@@ -28,8 +28,8 @@ module.exports = class HelloCommand extends SlashCommand {
     try {
       let holders: string;
 
-      if (cache.has(cacheKey)) {
-        holders = cache.get(cacheKey) as string;
+      if (await cache.has(cacheKey)) {
+        holders = (await cache.get(cacheKey)) as string;
       } else {
         const [ethExplorerResp, covalentResp]: Response[] = await Promise.all([
           fetch(ethExplorerUrl, init),
@@ -48,15 +48,15 @@ module.exports = class HelloCommand extends SlashCommand {
             covalentBody.data.pagination.total_count,
         );
 
-        cache.set(cacheKey, holders, 60); // going to cache this one longer since changes aren't as drastic
+        await cache.set(cacheKey, holders, 30); // used a longer TTL since the changes arent as drastic
       }
 
-      await ctx.send(
+      return await ctx.send(
         `<:pepeholdmm:861835461458657331> Current holders count is **${holders}**.`,
       );
     } catch (error) {
-      console.log(error);
-      await ctx.send(`Something went wrong - try again a bit later.`);
+      console.log(error.message);
+      return await ctx.send(`Something went wrong - try again a bit later.`);
     }
   }
 };

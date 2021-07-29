@@ -31,12 +31,12 @@ module.exports = class GasCommand extends SlashCommand {
     try {
       let responseBody: EthGasResponseBody;
 
-      if (cache.has(cacheKey)) {
-        responseBody = cache.get(cacheKey) as EthGasResponseBody;
+      if (await cache.has(cacheKey)) {
+        responseBody = (await cache.get(cacheKey)) as EthGasResponseBody;
       } else {
         const response = await fetch(apiUrl, init);
         responseBody = await response.json();
-        cache.set(cacheKey, responseBody);
+        await cache.set(cacheKey, responseBody);
       }
 
       const {

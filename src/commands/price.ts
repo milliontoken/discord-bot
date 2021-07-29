@@ -27,8 +27,8 @@ module.exports = class HelloCommand extends SlashCommand {
 
     let commandResponse;
     try {
-      if (cache.has(cacheKey)) {
-        commandResponse = cache.get(cacheKey);
+      if (await cache.has(cacheKey)) {
+        commandResponse = await cache.get(cacheKey);
       } else {
         const apiResponse = await fetch(apiUrl, init);
         const apiResponseBody = await apiResponse.json();
@@ -37,7 +37,7 @@ module.exports = class HelloCommand extends SlashCommand {
           apiResponseBody[0].price,
         ).toFixed(4)}** (${formatPercentageChange(priceChange)}%).`;
 
-        cache.set(cacheKey, commandResponse);
+        await cache.set(cacheKey, commandResponse);
       }
     } catch {
       commandResponse = `Something went wrong - try again a bit later.`;
