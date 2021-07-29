@@ -11,16 +11,16 @@ class Cache {
     this.cache = new NodeCache(cacheOptions);
   }
 
-  get(key: string) {
-    return this.cache.get(key);
+  async get(key: string) {
+    return await this.cache.get(key);
   }
 
-  set(key: string, value: unknown, ttl?: string | number) {
-    return this.cache.set(key, value, ttl);
+  async set(key: string, value: unknown, ttl?: string | number) {
+    return await this.cache.set(key, value, ttl);
   }
 
-  has(key: string) {
-    return this.cache.has(key);
+  async has(key: string) {
+    return await this.cache.has(key);
   }
 }
 
