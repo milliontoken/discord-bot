@@ -29,7 +29,7 @@ module.exports = class HelloCommand extends SlashCommand {
       let holders: string;
 
       if (cache.has(cacheKey)) {
-        holders = cache.get(cacheKey);
+        holders = cache.get(cacheKey) as string;
       } else {
         const [ethExplorerResp, covalentResp]: Response[] = await Promise.all([
           fetch(ethExplorerUrl, init),
