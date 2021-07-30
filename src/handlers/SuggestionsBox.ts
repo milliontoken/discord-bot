@@ -3,8 +3,7 @@ import { IMessageHandler } from "./IMessageHandler";
 
 export class SuggestionsBox implements IMessageHandler {
     
-    private channel_id = '867302015892717568'
-
+    private channel_id = '870438625219842090';
 
     handle(message: Message): void 
     {
