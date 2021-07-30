@@ -10,9 +10,11 @@
     "lint": "eslint . --ext .ts,.tsx"
   },
   "dependencies": {
+    "@types/express": "^4.17.13",
     "discord.js": "^12.5.3",
     "dotenv": "^10.0.0",
     "node-cache": "^5.1.2",
+    "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "slash-create": "^3.3.0",
     "tslib": "~2.1.0"
