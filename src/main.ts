@@ -1,10 +1,10 @@
 import { Client, WSEventType } from 'discord.js';
-import { ExpressServer, GatewayServer, SlashCreator } from 'slash-create';
+import {GatewayServer, SlashCreator } from 'slash-create';
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 import { MessageHandlerManager } from './handlers/MessageHandlerManager';
 import { SuggestionsBox } from './handlers/SuggestionsBox';
-import Express from 'express';
+import * as Express from 'express';
 
 class Main {
   private creator: SlashCreator;
